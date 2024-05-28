@@ -1,0 +1,49 @@
+<configuration>
+    <property name="LOG_ROOT" value="../logs/app_log_sa" />
+    <property name="LOG_FILE_NAME" value="application" />
+
+    <timestamp key="byNanoSec" datePattern="yyyy-MM-dd'T'HH:mm:ss.SSS"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${byNanoSec} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_ROOT}/${LOG_FILE_NAME}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_ROOT}/${LOG_FILE_NAME}-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- each archived file's size will be max 1MB -->
+            <maxFileSize>1MB</maxFileSize>
+            <!-- 10 days to keep -->
+            <maxHistory>10</maxHistory>
+            <!-- total size of all archive files, if total size > 1GB, it will delete old archived file -->
+            <totalSizeCap>512MB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${byNanoSec} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.springframework" level="INFO">
+        <appender-ref ref="FILE"/>
+    </logger>
+
+    <logger name="mysql" level="INFO">
+        <appender-ref ref="FILE"/>
+    </logger>
+
+    <logger name="com.javalearnings.securitydemo" level="INFO">
+        <appender-ref ref="FILE"/>
+    </logger>
+
+    <logger name="com.javalearnings.securitydemo" level="DEBUG">
+        <appender-ref ref="FILE"/>
+    </logger>
+
+    <root level="ERROR">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+    </root>
+</configuration>
