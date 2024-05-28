@@ -12,6 +12,8 @@ Security Implementation using JWT Token
 
 Exceptional Handling for Rest Controllers and Filters
 
+Used AOP for logging
+
 Email Notification
 - Email without Attachment
 - Email with Attachment as PDF using ITEXTPDF
