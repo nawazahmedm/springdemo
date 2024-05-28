@@ -1,4 +1,4 @@
-Basic Spring Application
+Spring Application Example
 
 Swagger Documentation using Open API
 
