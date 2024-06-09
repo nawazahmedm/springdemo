@@ -1,6 +1,8 @@
 package com.javalearnings.securitydemo.utils;
 
+import com.itextpdf.html2pdf.ConverterProperties;
 import com.itextpdf.html2pdf.HtmlConverter;
+import com.itextpdf.kernel.events.PdfDocumentEvent;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
@@ -20,6 +22,7 @@ import jakarta.mail.util.ByteArrayDataSource;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Objects;
 
 /**
  * The type Email notification
@@ -74,12 +77,8 @@ public class EmailNotificationManager {
             throws MessagingException, UnsupportedEncodingException {
         helper = new MimeMessageHelper(mimeMessage, false, "utf-8");
         helper.setTo(to);
-        if (replyTo != null) {
-            helper.setReplyTo(replyTo);
-        }
-        if (cc != null) {
-            helper.setCc(cc);
-        }
+        helper.setReplyTo(Objects.requireNonNullElse(replyTo, ""));
+        helper.setCc(Objects.requireNonNullElse(cc, ""));
         helper.setSubject(subject);
         helper.setText(htmlText, true);
         mimeMessage.saveChanges();
@@ -99,11 +98,11 @@ public class EmailNotificationManager {
             throws MessagingException, UnsupportedEncodingException {
         helper = new MimeMessageHelper(mimeMessage, false, "utf-8");
         helper.setTo(to);
-        if (replyTo != null) {
-            helper.setReplyTo(replyTo);
-        }
+        helper.setReplyTo(Objects.requireNonNullElse(replyTo, ""));
         if (cc != null) {
             helper.setCc(cc);
+        } else {
+            helper.setCc("");
         }
         helper.setSubject(subject);
         helper.setText(htmlText, true);
@@ -142,9 +141,7 @@ public class EmailNotificationManager {
             throws MessagingException, UnsupportedEncodingException {
         helper = new MimeMessageHelper(mimeMessage, false, "utf-8");
         helper.setTo(to);
-        if (cc != null) {
-            helper.setCc(cc);
-        }
+        helper.setCc(Objects.requireNonNullElse(cc, ""));
         helper.setSubject(subject);
         helper.setText(htmlText, true);
         mimeMessage.saveChanges();
@@ -174,11 +171,10 @@ public class EmailNotificationManager {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PdfWriter writer = new PdfWriter(baos);
         PdfDocument pdfDoc = new PdfDocument(writer);
+        pdfDoc.addEventHandler(PdfDocumentEvent.END_PAGE, new FooterEventHandler());
 
-        pdfDoc.addEventHandler(com.itextpdf.kernel.events.PdfDocumentEvent.END_PAGE, new FooterEventHandler());
-
-        Document document = HtmlConverter.convertToDocument(html, pdfDoc.getWriter());
-
+        ConverterProperties props = new ConverterProperties();
+        Document document = HtmlConverter.convertToDocument(html, pdfDoc, props);
         document.close();
         return baos.toByteArray();
     }
@@ -209,11 +205,11 @@ public class EmailNotificationManager {
     public void sendEmailWithAttachment(String to, String[] cc, String subject, String body, byte[] pdfData, String replyTo) throws MessagingException {
         helper = new MimeMessageHelper(mimeMessage, true, "utf-8");
         helper.setTo(to);
-        if (replyTo != null) {
-            helper.setReplyTo(replyTo);
-        }
+        helper.setReplyTo(Objects.requireNonNullElse(replyTo, ""));
         if (cc != null) {
             helper.setCc(cc);
+        } else {
+            helper.setCc("");
         }
         helper.setSubject(subject);
         helper.setText(body, true);
