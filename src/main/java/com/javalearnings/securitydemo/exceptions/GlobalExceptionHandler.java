@@ -18,7 +18,7 @@ import static java.util.stream.Collectors.toList;
 /**
  * GlobalExceptionHandler will catch validation failures and return a custom HTTP Status 400 Bad Request response.
  *
- * @author Ryan Bliss (ryan.bliss@cerner.com)
+ * @author Nawaz Mohammed
  * @since 2022-02-25
  */
 @Slf4j
