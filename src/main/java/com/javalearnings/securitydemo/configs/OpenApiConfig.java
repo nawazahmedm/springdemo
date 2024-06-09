@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @OpenAPIDefinition(
         info = @Info(title = "${api.title}", version = "${api.version}",
-                contact = @Contact(name = "${api.developer.contact}", email = "${api.developer.email}", url = "${api.softthink.url}"),
+                contact = @Contact(name = "${api.developer.contact}", email = "${api.developer.email}", url = "${api.testing.url}"),
                 license = @License(name = "${apache.name}", url = "${apache.url}"),
                 termsOfService = "${tos.uri}",
                 description = "${api.description}"),
