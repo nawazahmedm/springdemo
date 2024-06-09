@@ -1,6 +1,7 @@
 package com.javalearnings.securitydemo.configs;
 
 import com.javalearnings.securitydemo.constants.EmailConstants;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -10,6 +11,9 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Properties;
 
 @Configuration
+@EnableConfigurationProperties({
+        FileStorageProperties.class
+})
 public class ConfigManager {
 
     final EmailConstants emailConstants;

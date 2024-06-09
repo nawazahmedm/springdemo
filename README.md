@@ -14,6 +14,8 @@ Exceptional Handling for Rest Controllers and Filters
 
 Used AOP for logging
 
+File Upload and Download
+
 Email Notification
 - Email without Attachment
 - Email with Attachment as PDF using ITEXTPDF
