@@ -39,7 +39,8 @@ public interface FileController {
             consumes = { "multipart/form-data" }
     )
     @CrossOrigin
-    UploadFileResponse uploadFile(@Parameter(name = "body", description = "Upload File", required = true,
+    UploadFileResponse uploadFile(@RequestHeader(value = "UserId", required = true) Integer userId,
+                                  @Parameter(name = "body", description = "Upload File", required = true,
             schema = @Schema(description = "")) @RequestParam("file") @RequestBody MultipartFile file,
                                   @RequestParam Integer documentID, @RequestParam Integer personID,
                                   @RequestParam String documentTypeCode, @RequestParam String tabName);
@@ -67,6 +68,7 @@ public interface FileController {
             produces = { "application/json" }
     )
     @CrossOrigin
-    ResponseEntity<Resource> downloadFile(@RequestParam Integer documentID, @RequestParam Integer personID);
+    ResponseEntity<Resource> downloadFile(@RequestHeader(value = "UserId", required = true) Integer userId,
+                                          @RequestParam Integer documentID, @RequestParam Integer personID);
 
 }

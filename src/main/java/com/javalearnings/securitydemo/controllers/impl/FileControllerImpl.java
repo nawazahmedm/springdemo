@@ -24,7 +24,7 @@ public class FileControllerImpl implements FileController {
     private FileStorageService fileStorageService;
 
     @Override
-    public UploadFileResponse uploadFile(MultipartFile file, Integer documentID, Integer personID, String documentTypeCode, String tabName) {
+    public UploadFileResponse uploadFile(Integer userId, MultipartFile file, Integer documentID, Integer personID, String documentTypeCode, String tabName) {
         log.debug("FileControllerImpl : UploadFileResponse : Start");
         System.out.println("UploadFileResponse method");
         DocumentContent documentContent = fileStorageService.storeFile(documentID, personID, documentTypeCode, tabName, file);
@@ -40,7 +40,7 @@ public class FileControllerImpl implements FileController {
     }
 
     @Override
-    public ResponseEntity<Resource> downloadFile(Integer documentID, Integer personID) {
+    public ResponseEntity<Resource> downloadFile(Integer userId, Integer documentID, Integer personID) {
         return fileStorageService.downloadFile(documentID, personID);
     }
 

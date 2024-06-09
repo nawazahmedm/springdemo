@@ -133,7 +133,7 @@ public class FileStorageServiceImpl implements FileStorageService {
     @Override
     public Integer findDocumentID(Integer personID) {
         List<Document> documentList = documentRepository.findByPersonIdAndDocumentTypeCode(personID, "Person");
-        if(documentList != null && documentList.size() > 0) {
+        if(documentList != null && !documentList.isEmpty()) {
             return documentList.get(0).getId();
         }
         return 0;
