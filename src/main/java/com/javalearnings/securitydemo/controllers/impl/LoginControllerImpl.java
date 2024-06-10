@@ -35,10 +35,10 @@ public class LoginControllerImpl implements LoginController {
             log.debug("LoginController : validateLogin : userResponseEntity {}", userResponseEntity);
             return userResponseEntity;
         } catch (BusinessException businessException) {
-            log.error("LoginController : validateLogin : BusinessException : {}", businessException);
+            log.error("LoginController : validateLogin : BusinessException : ", businessException);
             throw new BusinessException(businessException.getCode(), businessException.getMessage(), businessException.getHttpStatus());
         } catch (Exception exception) {
-            log.error("LoginController : validateLogin : Exception : {}", exception);
+            log.error("LoginController : validateLogin : Exception : ", exception);
             throw new GenericException(exception);
         }
     }
