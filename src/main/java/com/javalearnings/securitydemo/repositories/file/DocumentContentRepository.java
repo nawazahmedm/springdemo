@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface DocumentContentRepository extends JpaRepository<DocumentContent, Integer> {
 
-    @Query(value = "select * from documentcontent dc  " +
+    @Query(value = "select dc.* from documentcontent dc  " +
             "join documents d on d.documentId = dc.documentContentId " +
             "where personId = :personId order by documentContentId desc ", nativeQuery = true)
     List<DocumentContent> findDocumentContentByPersonId(Integer personId);

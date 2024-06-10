@@ -20,7 +20,8 @@ public class DocumentContent {
     @Column(name = "FileType", length = 50)
     private String fileType;
 
-    @Column(name = "Content", length = 80000)
+    @Lob
+    @Column(name = "Content")
     private byte[] content;
 
     @Column(name = "CreatedDate")
