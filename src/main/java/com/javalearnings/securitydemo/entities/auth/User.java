@@ -35,13 +35,13 @@ public class User implements UserDetails, Serializable {
     @Column(name="country_id", nullable = true)
     private String countryId;
 
-    @Column(name="created_date", nullable = true)
+    @Column(name="created_date")
     private LocalDate createdDate;
 
-    @Column(name="created_user_id", nullable = true)
+    @Column(name="created_user_id")
     private Integer createdUserId;
 
-    @Column(name="failed_login_date", nullable = true)
+    @Column(name="failed_login_date")
     private LocalDate failedLoginDate;
 
     @Column(name="failed_logins", nullable = true)
