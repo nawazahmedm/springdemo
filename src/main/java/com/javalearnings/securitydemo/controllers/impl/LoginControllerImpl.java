@@ -7,7 +7,7 @@ import com.javalearnings.securitydemo.model.login.RequestLoginForm;
 import com.javalearnings.securitydemo.model.login.ResponseLoginForm;
 import com.javalearnings.securitydemo.services.LoginService;
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ import java.net.UnknownHostException;
 
 @RestController
 @Slf4j
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class LoginControllerImpl implements LoginController {
 
     private final LoginService loginService;
